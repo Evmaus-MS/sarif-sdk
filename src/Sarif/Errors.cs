@@ -405,7 +405,7 @@ namespace Microsoft.CodeAnalysis.Sarif
                     context.TargetUri,
                     ERR998_RuleNotSupportedOnPlatform,
                     context.Rule.Id,
-                    NotificationLevel.Error,
+                    NotificationLevel.Warning,
                     exception,
                     true,
                     context.TargetUri.GetFileName(),
