@@ -234,4 +234,7 @@
   <data name="ERR997_InvalidInvocationPropertyName" xml:space="preserve">
     <value>'{0}' is not a property of the Invocation object.</value>
   </data>
+  <data name="ERR998_RuleNotSupportedOnPlatform" xml:space="preserve">
+    <value>An PlatformNotSupportedException was raised analyzing '{0}' for check '{1}' (which has been disabled).  This exception indicates that this rule is not supported on this platform.</value>
+  </data>
 </root>

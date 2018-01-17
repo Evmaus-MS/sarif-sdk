@@ -223,6 +223,15 @@ namespace Microsoft.CodeAnalysis.Sarif {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An PlatformNotSupportedException was raised analyzing &apos;{0}&apos; for check &apos;{1}&apos; (which has been disabled).  This exception indicates that this rule is not supported on this platform..
+        /// </summary>
+        internal static string ERR998_RuleNotSupportedOnPlatform {
+            get {
+                return ResourceManager.GetString("ERR998_RuleNotSupportedOnPlatform", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An exception was raised during analysis..
         /// </summary>
         internal static string ERR999_UnhandledEngineException {

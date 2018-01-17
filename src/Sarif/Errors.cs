@@ -29,6 +29,7 @@ namespace Microsoft.CodeAnalysis.Sarif
         private const string ERR998_ExceptionInCanAnalyze = "ERR998.ExceptionInCanAnalyze";
         private const string ERR998_ExceptionInInitialize = "ERR998.ExceptionInInitialize";
         private const string ERR998_ExceptionInAnalyze = "ERR998.ExceptionInAnalyze";
+        private const string ERR998_RuleNotSupportedOnPlatform = "ERR998.RuleNotSupportedOnPlatform";
 
         // Analysis halting tool errors:
         private const string ERR999UnhandledEngineException = "ERR999.UnhandledEngineException";
@@ -374,6 +375,35 @@ namespace Microsoft.CodeAnalysis.Sarif
                 CreateNotification(
                     context.TargetUri,
                     ERR998_ExceptionInAnalyze,
+                    context.Rule.Id,
+                    NotificationLevel.Error,
+                    exception,
+                    true,
+                    context.TargetUri.GetFileName(),
+                    context.Rule.Name));
+
+            if (disabledSkimmers != null) { disabledSkimmers.Add(context.Rule.Id); }
+
+            return RuntimeConditions.ExceptionInSkimmerAnalyze;
+        }
+
+        public static RuntimeConditions LogRuleNotSupportedOnPlatform(
+            HashSet<string> disabledSkimmers, 
+            IAnalysisContext context, 
+            PlatformNotSupportedException exception)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            // An PlatformNotSupportedException was raised analyzing '{0}' 
+            // for check '{1}' (which has been disabled).  This exception 
+            // indicates that the rule is not supported on this platform.
+            context.Logger.LogToolNotification(
+                CreateNotification(
+                    context.TargetUri,
+                    ERR998_RuleNotSupportedOnPlatform,
                     context.Rule.Id,
                     NotificationLevel.Error,
                     exception,

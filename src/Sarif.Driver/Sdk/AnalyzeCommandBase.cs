@@ -460,6 +460,10 @@ namespace Microsoft.CodeAnalysis.Sarif.Driver
                 {
                     skimmer.Analyze(context);
                 }
+                catch (PlatformNotSupportedException ex)
+                {
+                    RuntimeErrors |= Errors.LogRuleNotSupportedOnPlatform(disabledSkimmers, context, ex);
+                }
                 catch (Exception ex)
                 {
                     RuntimeErrors |= Errors.LogUnhandledRuleExceptionAnalyzingTarget(disabledSkimmers, context, ex);
